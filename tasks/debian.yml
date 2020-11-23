@@ -1,0 +1,16 @@
+---
+- name: Configure apt-transport-https package
+  package:
+    name: apt-transport-https
+    state: present
+
+- name: Configure InfluxData repository key
+  apt_key:
+    url: "{{ influxdata_repository_gpg_url }}"
+    state: "{{ influxdata_repository_state }}"
+
+- name: Configure InfluxData repository
+  apt_repository:
+    filename: influxdata
+    repo: "{{ influxdata_repository_url }}"
+    state: "{{ influxdata_repository_state }}"

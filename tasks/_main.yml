@@ -1,0 +1,28 @@
+---
+- name: Include operating system specific variables
+  include_vars: "{{ influxdata_os_vars }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths:
+        - vars
+      skip: yes
+  loop_control:
+    loop_var: influxdata_os_vars
+
+- name: Include operating system specific tasks
+  include_tasks: "{{ influxdata_os_tasks }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths:
+        - tasks
+      skip: yes
+  loop_control:
+    loop_var: influxdata_os_tasks

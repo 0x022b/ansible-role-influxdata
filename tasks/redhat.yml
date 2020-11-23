@@ -1,0 +1,9 @@
+---
+- name: Configure InfluxData repository
+  yum_repository:
+    name: influxdata
+    description: InfluxData Repository
+    baseurl: "{{ influxdata_repository_url }}"
+    gpgcheck: yes
+    gpgkey: "{{ influxdata_repository_gpg_url }}"
+    state: "{{ influxdata_repository_state }}"

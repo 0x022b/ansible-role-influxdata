@@ -1,0 +1,2 @@
+---
+influxdata_repository_url: https://repos.influxdata.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/stable
